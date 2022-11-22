@@ -14,3 +14,5 @@
 1. git add . || filename || folder name
 2.  git commit -m "détails instruction" 
 3. git push -u origin main
+
+# Etapes projet
