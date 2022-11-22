@@ -64,9 +64,33 @@ class User extends Model
         return $stmt->fetch();
     }
 
-    public function insert()
+    /**
+     * Insérer un utilisateur dans la BDD
+     * @return void
+     */
+    public function insert() : void
     {
+        $stmt = $this->pdo->prepare("INSERT INTO user (`email`, `password`) VALUES (:email, :password)");
 
+        $stmt->execute([
+            "email" => $this->email,
+            "password" => password_hash($this->password, PASSWORD_ARGON2ID)
+        ]);
+    }
+
+    /**
+     * find an element by id
+     *
+     * @param int $id
+     * @return self|false
+     */
+    public function find(int $id) : self|false
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM user WHERE id = :id ");
+        $stmt->bindParam(':id', $id);
+        $stmt->setFetchMode(PDO::FETCH_CLASS , __CLASS__);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
 }
