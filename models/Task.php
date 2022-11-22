@@ -1,12 +1,16 @@
 <?php
 
-class Task
+require_once 'utilities/Model.php';
+
+class Task  extends Model
 {
     private int $id;
     private string $name;
     private string $to_do_at; // TODO change type
     private bool $is_done;
     private int $id_user;
+
+
 
     // accesseurs (getters & setters)
 

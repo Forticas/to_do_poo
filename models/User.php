@@ -1,10 +1,13 @@
 <?php
 
-class User
+require_once 'utilities/Model.php';
+
+class User extends Model
 {
     private  int $id;
     private string $email;
     private string $password;
+
 
     /**
      * @return int
@@ -47,5 +50,23 @@ class User
         $this->password = $password;
     }
 
+    /**
+     * La méthode permet de récupérer un utilisateur à partir d'une adresse mail fournie
+     *
+     * @param string $email
+     * @return array|false
+     */
+    public function getOneByEmail(string $email) : array|false
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM user WHERE email = :email ");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function insert()
+    {
+
+    }
 
 }
