@@ -55,9 +55,9 @@ class User extends Model
 
     /**
      * Insérer un utilisateur dans la BDD
-     * @return void
+     * @return int|false  l'id du dernier élément inséré ou false dans le cas d'échec
      */
-    public function insert() : void
+    public function insert() : int|false
     {
         $stmt = $this->pdo->prepare("INSERT INTO user (`email`, `password`) VALUES (:email, :password)");
 
@@ -65,7 +65,7 @@ class User extends Model
             "email" => $this->email,
             "password" => password_hash($this->password, PASSWORD_ARGON2ID)
         ]);
-
+        return $this->pdo->lastInsertId();
     }
 
 
