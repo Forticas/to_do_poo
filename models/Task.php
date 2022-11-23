@@ -10,6 +10,8 @@ class Task  extends Model
     private bool $is_done;
     private int $id_user;
 
+    protected string $table_name = "task";
+
 
 
     // accesseurs (getters & setters)
@@ -92,6 +94,7 @@ class Task  extends Model
     {
         $this->id_user = $id_user;
     }
+
 
 
 
