@@ -1,6 +1,7 @@
 <?php
+require_once 'utilities/Controller.php';
 
-class UserController
+class UserController extends Controller
 {
 
     public function login()

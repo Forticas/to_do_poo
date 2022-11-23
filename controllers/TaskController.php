@@ -1,31 +1,39 @@
 <?php
 
 require_once 'models/Task.php';
+require_once 'utilities/Controller.php';
 
-class TaskController
+class TaskController extends Controller
 {
-    public function index()
+    /**
+     * afficher la liste des tâches
+     * @return void
+     */
+    public function index() :void
     {
         // instance
         $task = new Task();
         // récupérer la liste des tâches
-        $tasks = $task->findAll('Task');
-        ob_start() ;
-        require_once 'views/task/index.php';
-        $content = ob_get_clean();
-        require_once 'views/layout.php';
+
+        $tasks = $task->findAllBy(['id_user' => 1],'Task');
+        $message = 'hello';
+        /*
+         * [
+            'tasks' => $tasks,
+            'message' => $message
+        ]
+         */
+        $this->renderView('task/index', compact('tasks', 'message'));
     }
 
     public function insert()
     {
-        ob_start() ;
-        require_once 'views/task/insert.php';
-        $content = ob_get_clean();
-        require_once 'views/layout.php';
+        $this->renderView('task/insert');
     }
 
     public function delete()
     {
+
         echo "Task controller ".__FUNCTION__;
     }
 
