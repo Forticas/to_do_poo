@@ -1,7 +1,7 @@
 <?php
 
-require_once  'controllers/TaskController.php';
-require_once  'controllers/UserController.php';
+require_once  'src/controllers/TaskController.php';
+require_once  'src/controllers/UserController.php';
 
 // monsite.fr/index.php?controller=task&action=index
 
