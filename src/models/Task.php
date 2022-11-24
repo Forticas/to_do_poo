@@ -6,7 +6,7 @@ class Task  extends Model
 {
     private int $id;
     private string $name;
-    private string $to_do_at; // TODO change type
+    private DateTimeImmutable $to_do_at;
     private bool $is_done = false;
     private int $id_user;
     protected string $table_name = "task";
@@ -43,19 +43,20 @@ class Task  extends Model
     }
 
     /**
-     * @return string
+     * @return DateTimeImmutable
      */
-    public function getToDoAt(): string
+    public function getToDoAt(): DateTimeImmutable
     {
-        return $this->to_do_at;
+        return new DateTimeImmutable($this->to_do_at);
     }
 
     /**
-     * @param string $to_do_at
+     * @param DateTimeImmutable $to_do_at
      * @return void
      */
-    public function setToDoAt(string $to_do_at): void
+    public function setToDoAt(DateTimeImmutable $to_do_at): void
     {
+
         $this->to_do_at = $to_do_at;
     }
 
@@ -104,7 +105,7 @@ class Task  extends Model
 
         $stmt->execute([
             'name' => $this->name,
-            'to_do_at' => $this->to_do_at,
+            'to_do_at' => $this->to_do_at->format('Y-m-d H:i'),
             'is_done' => $this->is_done,
             'id_user' => $this->id_user,
         ]);

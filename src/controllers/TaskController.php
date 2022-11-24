@@ -11,23 +11,37 @@ class TaskController extends Controller
      */
     public function index() :void
     {
-        // instance
         $task = new Task();
-        // récupérer la liste des tâches
 
         $tasks = $task->findAllBy(['id_user' => 1],'Task');
         $message = 'hello';
-        /*
-         * [
-            'tasks' => $tasks,
-            'message' => $message
-        ]
-         */
+
         $this->renderView('task/index', compact('tasks', 'message'));
     }
 
     public function insert()
     {
+
+        if (isset($_POST['submit'])){
+
+
+            $task = new Task();
+            $task->setIdUser(1);
+            $task->setName(htmlentities($_POST['name']));
+            $task->setToDoAt(new DateTimeImmutable($_POST['to_do_at']));
+
+            $result = $task->insert();
+
+            if ($result ){
+                $message =  "insertion bien effectuée";
+            }else {
+                $message =  "échec";
+            }
+            $this->renderView('task/insert', [
+                'message' => $message
+            ]);
+
+        }
         $this->renderView('task/insert');
     }
 

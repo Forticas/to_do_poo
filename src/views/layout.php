@@ -9,7 +9,7 @@
 </head>
 <body>
 
-        <h1>Ceci est la vue</h1>
+
         <?= $content ?>
 
 </body>
