@@ -15,4 +15,5 @@
 2.  git commit -m "détails instruction" 
 3. git push -u origin main
 
-# Etapes projet
+# Erreurs à résoudre
+1. accès au constructeur du model de la part du PDOStatement

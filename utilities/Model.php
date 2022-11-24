@@ -81,6 +81,7 @@ abstract class Model
 
         if ($class_name)
             $stmt->setFetchMode(PDO::FETCH_CLASS , $class_name);
+
         $stmt->execute($criteria);
         return $stmt->fetchAll();
     }
