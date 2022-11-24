@@ -1,15 +1,13 @@
 <?php
 
-require_once  'src/controllers/TaskController.php';
-require_once  'src/controllers/UserController.php';
+require_once 'config/routes.php';
 
-// monsite.fr/index.php?controller=task&action=index
+$request_uri = str_replace('/to_do_poo', '', $_SERVER['REQUEST_URI']);
 
-
-$controller_name = ucfirst(strtolower($_GET['controller'])).'Controller';
-$action_name = strtolower($_GET['action']);
-
-
-$controller_instance = new $controller_name();
-
-$controller_instance->$action_name();
+var_dump($request_uri);
+try {
+    Router::resolve($request_uri);
+}catch (Exception $e)
+{
+    echo $e->getMessage();
+}
