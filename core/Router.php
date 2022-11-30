@@ -1,7 +1,5 @@
 <?php
 
-require_once 'src/controllers/UserController.php';
-require_once 'src/controllers/TaskController.php';
 
 class Router
 {

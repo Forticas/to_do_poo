@@ -4,6 +4,8 @@
 const BASE_DIR = '/to_do_poo';
 
 require_once 'vendor/autoload.php';
+
+require_once 'config/autoloader.php';
 require_once 'config/routes.php';
 
 $whoops = new \Whoops\Run;
