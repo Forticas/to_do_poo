@@ -18,3 +18,6 @@
 
 # étape 1 
 lancer ```composer install```
+
+# étape 2 
+renommer .env.example => .env
