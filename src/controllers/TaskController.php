@@ -13,10 +13,16 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $tasks = $task->findAllBy(['id_user' => 1], 'Task');
+        $tasks = $task->findAllBy(['id_user' => 1]);
         $message = 'hello';
-        var_dump($tasks);die;
+        dd($tasks);
         $this->renderView('task/index', compact('tasks', 'message'));
+    }
+    // ?id=10
+    // task/show/10
+    public function show(int $id)
+    {
+
     }
 
     public function insert()
@@ -28,7 +34,7 @@ class TaskController extends Controller
             $task = new Task();
             $task->setIdUser(1);
             $task->setName(htmlentities($_POST['name']));
-            $task->setToDoAt(new DateTimeImmutable($_POST['to_do_at']));
+            $task->setToDoAt(htmlentities($_POST['to_do_at']));
 
             $result = $task->insert();
 
