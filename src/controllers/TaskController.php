@@ -13,9 +13,9 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $tasks = $task->findAllBy(['id_user' => 1]);
+        $tasks = $task->findAllBy(['id_user' => 1], 'Task');
         $message = 'hello';
-
+        var_dump($tasks);die;
         $this->renderView('task/index', compact('tasks', 'message'));
     }
 
