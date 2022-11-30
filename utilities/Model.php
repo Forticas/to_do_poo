@@ -15,29 +15,33 @@ abstract class Model
 
     /**
      * @param int $id l'identifiant de l'élément à afficher
-     * @param string|null $class_name le nom de la classe si jamais on aura besoin de récupérer l'élément sous format d'objet
+     * @param boolean $is_array s'il est à true on aura les résultats sous format d'un tableau associatif, si non c'est le format du model
      * @return array|object|false
      */
-    public function find(int $id, string $class_name = null) : array|object|false
+    public function find(int $id, bool $is_array = false) : array|object|false
     {
         $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_name} WHERE id = :id ");
         $stmt->bindParam(':id', $id);
-        if ($class_name)
-            $stmt->setFetchMode(PDO::FETCH_CLASS , $class_name);
+        if ($is_array)
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        else
+            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
         $stmt->execute();
         return $stmt->fetch();
     }
 
     /**
      * get all elements
-     * @param string|null $class_name
+     * @param boolean $is_array s'il est à true on aura les résultats sous format d'un tableau associatif, si non c'est le format du model
      * @return array|false
      */
-    public function findAll(string $class_name = null) : array|false
+    public function findAll(bool $is_array = false) : array|false
     {
         $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_name}");
-        if ($class_name)
-            $stmt->setFetchMode(PDO::FETCH_CLASS , $class_name);
+        if ($is_array)
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        else
+            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -58,10 +62,10 @@ abstract class Model
     /**
      * permet de récupérer plusieurs éléments selon un ou plusieurs critères de recherche
      * @param array $criteria les critères de recherche
-     * @param string|null $class_name
+     * @param boolean $is_array s'il est à true on aura les résultats sous format d'un tableau associatif, si non c'est le format du model
      * @return array|false
      */
-    public function findAllBy(array $criteria , string $class_name=null) : array|false
+    public function findAllBy(array $criteria , bool $is_array = false) : array|false
     {
         if (empty($criteria)){
             throw  new Exception("Il faut passer au moins un critère");
@@ -79,9 +83,10 @@ abstract class Model
 
         $stmt = $this->pdo->prepare($sql_query);
 
-        if ($class_name)
-            $stmt->setFetchMode(PDO::FETCH_CLASS , $class_name);
-
+        if ($is_array)
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        else
+            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
         $stmt->execute($criteria);
         return $stmt->fetchAll();
     }
@@ -89,11 +94,11 @@ abstract class Model
     /**
      * Récupérer un élément avec un ou plusieurs critères
      * @param array $criteria
-     * @param string|null $class_name
+     * @param boolean $is_array s'il est à true on aura les résultats sous format d'un tableau associatif, si non c'est le format du model
      * @return object|array|false
      * @throws Exception
      */
-    public function findOneBy(array $criteria , string $class_name=null) : object|array|false
+    public function findOneBy(array $criteria , bool $is_array = false) : object|array|false
     {
         if (empty($criteria)){
             throw  new Exception("Il faut passer au moins un critère");
@@ -112,9 +117,10 @@ abstract class Model
         foreach ($criteria as $key => $value){
             $stmt->bindParam(":$key", $value);
         }
-        if ($class_name){
-            $stmt->setFetchMode(PDO::FETCH_CLASS , $class_name);
-        }
+        if ($is_array)
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        else
+            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
         $stmt->execute();
         return $stmt->fetch();
     }
