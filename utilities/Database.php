@@ -16,9 +16,9 @@ class Database
         if (self::$instance == null){
             try {
                 self::$instance = new PDO(
-                    "mysql:host=localhost;dbname=todo",
-                    "root",
-                    "",
+                    "mysql:host=".$_ENV['DATABASE_HOST'].";dbname=".$_ENV['DATABASE_NAME'],
+                    $_ENV['DATABASE_USERNAME'],
+                    $_ENV['DATABASE_PASSWORD'],
                     [
                         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC

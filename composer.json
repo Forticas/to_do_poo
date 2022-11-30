@@ -4,6 +4,6 @@
         "filp/whoops": "^2.14"
     },
     "require": {
-
+        "vlucas/phpdotenv": "^5.5"
     }
 }
