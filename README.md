@@ -15,5 +15,6 @@
 2.  git commit -m "détails instruction" 
 3. git push -u origin main
 
-# Erreurs à résoudre
-1. accès au constructeur du model de la part du PDOStatement
+
+# étape 1 
+lancer ```composer install```
