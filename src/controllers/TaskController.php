@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Controllers;
+
+use Core\Controller;
 
 class TaskController extends Controller
 {

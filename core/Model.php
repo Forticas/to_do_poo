@@ -1,9 +1,10 @@
 <?php
 
+namespace Core;
 
 abstract class Model
 {
-    protected PDO $pdo;
+    protected \PDO $pdo;
 
     protected string $table_name;
 
@@ -22,9 +23,9 @@ abstract class Model
         $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_name} WHERE id = :id ");
         $stmt->bindParam(':id', $id);
         if ($is_array)
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         else
-            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
+            $stmt->setFetchMode(\PDO::FETCH_CLASS , get_called_class());
         $stmt->execute();
         return $stmt->fetch();
     }
@@ -38,9 +39,9 @@ abstract class Model
     {
         $stmt = $this->pdo->prepare("SELECT * FROM {$this->table_name}");
         if ($is_array)
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         else
-            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
+            $stmt->setFetchMode(\PDO::FETCH_CLASS , get_called_class());
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -83,9 +84,9 @@ abstract class Model
         $stmt = $this->pdo->prepare($sql_query);
 
         if ($is_array)
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         else
-            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
+            $stmt->setFetchMode(\PDO::FETCH_CLASS , get_called_class());
         $stmt->execute($criteria);
         return $stmt->fetchAll();
     }
@@ -117,9 +118,9 @@ abstract class Model
             $stmt->bindParam(":$key", $value);
         }
         if ($is_array)
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         else
-            $stmt->setFetchMode(PDO::FETCH_CLASS , get_called_class());
+            $stmt->setFetchMode(\PDO::FETCH_CLASS , get_called_class());
         $stmt->execute();
         return $stmt->fetch();
     }

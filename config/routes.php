@@ -3,6 +3,7 @@
 
 require_once 'core/Router.php';
 
+use Core\Router;
 
 Router::register('/task/all', 'TaskController::index' );
 Router::register('/login', 'UserController::login');
