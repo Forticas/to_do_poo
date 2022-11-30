@@ -37,6 +37,6 @@ class Router
 
 
         $instance = new $controller_name();
-        $instance->$action_name();
+        call_user_func_array([$instance, $action_name], []);
     }
 }
