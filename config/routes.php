@@ -1,7 +1,7 @@
 <?php
 
 
-require_once  'utilities/Router.php';
+require_once 'core/Router.php';
 
 
 Router::register('/task/all', 'TaskController::index' );

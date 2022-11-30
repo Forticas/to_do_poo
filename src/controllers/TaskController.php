@@ -1,7 +1,7 @@
 <?php
 
 require_once 'src/models/Task.php';
-require_once 'utilities/Controller.php';
+require_once 'core/Controller.php';
 
 class TaskController extends Controller
 {

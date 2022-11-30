@@ -1,5 +1,5 @@
 <?php
-require_once 'utilities/Controller.php';
+require_once 'core/Controller.php';
 
 class UserController extends Controller
 {

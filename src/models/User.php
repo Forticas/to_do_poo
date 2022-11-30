@@ -1,6 +1,6 @@
 <?php
 
-require_once 'utilities/Model.php';
+require_once 'core/Model.php';
 
 class User extends Model
 {
